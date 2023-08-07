@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=Elcucu1389
+      - MYSQL_DATABASE=your_database
+      - MYSQL_USER=gburucua
+      - MYSQL_PASSWORD=q1w2e3r4
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 10
+      timeout: 5s
+
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE=your_database
+      - MYSQL_USER=gburucua
+      - MYSQL_PASSWORD=q1w2e3r4

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Data Entry</title>
+</head>
+<body>
+    <h1>User Data Entry</h1>
+    {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    {% if data_saved %}
+    <p style="color: green;">Data saved successfully!</p>
+    <a href="/">Go back to form</a>
+    {% else %}
+    <form method="POST" action="/">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required><br><br>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    {% endif %}
+</body>
+</html>
