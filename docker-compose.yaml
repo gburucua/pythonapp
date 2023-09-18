@@ -13,7 +13,7 @@ services:
       retries: 10
       timeout: 5s
 
-  app:
+  backend:
     build: .
     ports:
       - "5000:5000"
@@ -27,3 +27,11 @@ services:
       - MYSQL_DATABASE=your_database
       - MYSQL_USER=gburucua
       - MYSQL_PASSWORD=q1w2e3r4
+    
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - backend

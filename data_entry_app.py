@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import time
 import mysql.connector
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.', static_url_path='', static_folder='static')  # Specify the template folder
+
 
 def create_table():
     conn = mysql.connector.connect(
@@ -30,6 +31,20 @@ def insert_data(name, age):
     conn.commit()
     conn.close()
 
+def fetch_data_from_database():
+    connection = mysql.connector.connect(
+        host="db",
+        database="your_database",
+        user="gburucua",
+        password="q1w2e3r4"
+    )
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM your_table")
+    data = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    return data
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -44,5 +59,22 @@ def index():
             return render_template("index.html", error_message=error_message, data_saved=False)
     return render_template("index.html", data_saved=False)
 
+@app.route("/api/data", methods=["GET"])
+def get_data():
+    # Retrieve data from the database and return as JSON
+    data = fetch_data_from_database()
+    return jsonify(data)
+
+@app.route("/api/data", methods=["POST"])
+def save_data():
+    try:
+        name = request.json["name"]
+        age = int(request.json["age"])
+        create_table()
+        insert_data(name, age)
+        return jsonify({"message": "Data saved successfully"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
