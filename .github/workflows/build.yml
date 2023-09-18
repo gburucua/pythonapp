@@ -24,11 +24,11 @@ jobs:
 
       - name: Get Public IP
         id: public_ip
-        uses: mylee/public-ip@v1
-     
+        run: echo "::set-env name=PUBLIC_IP::$(curl ifconfig.me)"
+
       - name: Update Security Group
         run: |
-          aws ec2 authorize-security-group-ingress --group-id sg-05ba363da649d4ef2 --protocol tcp --port 22 --source "$(cat ${{ steps.public_ip.outputs.ip_file }})"
- 
+          aws ec2 authorize-security-group-ingress --group-id sg-05ba363da649d4ef2 --protocol tcp --port 22 --source "${{ env.PUBLIC_IP }}"
+
       - name: Deploy to AWS
         run: bash scripts/deploy.sh
