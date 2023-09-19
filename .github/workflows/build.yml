@@ -13,13 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Allow SSH access from GitHub Actions runner
+      - name: Setup SSH key
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/temp_key
-          chmod 600 ~/.ssh/temp_key
-          mv ~/.ssh/temp_key ~/.ssh/id_rsa
-
-          # Add the host to the known_hosts file
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan your-instance-ip >> ~/.ssh/known_hosts
 
       - name: Login to Docker Hub
