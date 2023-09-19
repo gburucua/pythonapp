@@ -5,6 +5,9 @@ AWS_INSTANCE_IP="34.230.161.156"
 DOCKER_IMAGE_NAME="pythonapp"
 DOCKER_IMAGE_TAG="latest"
 
+# Container name to use
+CONTAINER_NAME="pythonapp"
+
 # Authenticate with Docker Hub
 # echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 
@@ -13,10 +16,10 @@ DOCKER_IMAGE_TAG="latest"
 ssh -i ~/.ssh/id_rsa ec2-user@$AWS_INSTANCE_IP "
 
  # Stop and remove the container if it exists
-    if docker ps -a --format '{{.Names}}' | grep -Eq '^gburucua/pythonapp:latest\$'; then
+    if docker ps -a --format '{{.Names}}' | grep -Eq '^$CONTAINER_NAME\$'; then
         echo 'Stopping and removing existing container...'
-        docker stop gburucua/pythonapp:latest
-        docker rm gburucua/pythonapp:latest
+        docker stop $CONTAINER_NAME
+        docker rm $CONTAINER_NAME
     fi
 
   # Authenticate with Docker Hub
