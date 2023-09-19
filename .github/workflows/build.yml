@@ -24,7 +24,7 @@ jobs:
 
       - name: Get Public IP
         id: public_ip
-        run: echo "::set-env name=PUBLIC_IP::$(curl ifconfig.me)"
+        run: echo "PUBLIC_IP=$(curl ifconfig.me)" > env.list
 
       - name: Update Security Group
         run: |
