@@ -1,4 +1,4 @@
-name: Build and Push, Update security group and Deploy Docker Image
+name: Build, Push and Deploy Docker Image
 
 on:
   push:
@@ -22,15 +22,5 @@ jobs:
       - name: Build and Push Docker Image
         run: bash scripts/build_and_push.sh
 
-      - name: Get Public IP
-        id: public_ip
-        run: echo "PUBLIC_IP=$(curl ifconfig.me)" > env.list
-
-      - name: Update Security Group
-        run: |
-          #aws ec2 authorize-security-group-ingress --group-id sg-05ba363da649d4ef2 --protocol tcp --port 22 --source "${{ env.PUBLIC_IP }}"
-          aws ec2 authorize-security-group-ingress --region us-east-1 --group-id sg-05ba363da649d4ef2 --protocol tcp --port 22 --source $PUBLIC_IP/32
-
-          
       - name: Deploy to AWS
         run: bash scripts/deploy.sh
