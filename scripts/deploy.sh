@@ -30,6 +30,9 @@ ssh -i ~/.ssh/id_rsa ec2-user@$AWS_INSTANCE_IP "
 
   # Run the Docker container
   docker run -d -p 5000:5000 --name pythonapp gburucua/pythonapp:latest
+
+  # Remove old Docker images to free up space
+  docker image prune -af
   "
 
 
