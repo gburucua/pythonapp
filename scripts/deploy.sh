@@ -13,5 +13,5 @@ ssh -i ~/.ssh/id_rsa ec2-user@$AWS_INSTANCE_IP <<EOF
   docker pull gburucua/pythonapp:latest
   docker stop gburucua/pythonapp:latest
   docker rm gburucua/pythonapp:latest
-  docker run -d -p 80:80 --name pythonapp gburucua/pythonapp:latest
+  docker run -d -p 5000:5000 --name pythonapp gburucua/pythonapp:latest
 EOF
