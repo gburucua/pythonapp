@@ -27,7 +27,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and Push Docker Image
-        run: bash scripts/build_and_push.sh
+        run: bash scripts/build_and_push.sh gburucua
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Deploy to AWS
         run: bash scripts/deploy.sh
