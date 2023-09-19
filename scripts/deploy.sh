@@ -10,7 +10,7 @@ echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdi
 
 # SSH into your AWS instance and deploy the updated image
 ssh -i ~/.ssh/id_rsa ec2-user@$AWS_INSTANCE_IP <<EOF
-  docker pull $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+  docker pull gburucua/pythonapp:latest
   docker stop pythonapp
   docker rm pythonapp
   docker run -d -p 80:80 --name pythonapp $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
