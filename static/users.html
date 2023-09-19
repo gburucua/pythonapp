@@ -1,31 +1,35 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>User Data Entry</title>
-</head>
-<body>
-    <h1>User Data Entry</h1>
-    <iframe src="http://backend:5000" width="100%" height="500"></iframe>
-</body>
-</html>
- -->
-
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>User Data Entry</title>
 </head>
-<body>
+
+<style>
+body{
+    background-image: url('/img/background.jpg');
+}
+</style>
+
     <h1>User Data Entry</h1>
     <form id="dataForm">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" required><br><br>
+
+        <label for="surname">Surame:</label>
+        <input type="text" name="surname" id="surname" required><br><br>
+
         <label for="age">Age:</label>
         <input type="number" name="age" id="age" required><br><br>
+        
+        <label for="gender">Gender:</label>
+        <input type="text" name="gender" id="gender" required><br><br>
+
+        <label for="name">Comments:</label>
+        <input type="text" name="name" id="name" required><br><br>
+
         <button type="submit">Submit</button>
     </form>
     <div id="message"></div>
     <script src="/script.js"></script>
-</body>
-</html>
+
+</html>   
