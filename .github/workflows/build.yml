@@ -28,7 +28,9 @@ jobs:
 
       - name: Update Security Group
         run: |
-          aws ec2 authorize-security-group-ingress --group-id sg-05ba363da649d4ef2 --protocol tcp --port 22 --source "${{ env.PUBLIC_IP }}"
+          #aws ec2 authorize-security-group-ingress --group-id sg-05ba363da649d4ef2 --protocol tcp --port 22 --source "${{ env.PUBLIC_IP }}"
+          aws ec2 authorize-security-group-ingress --region us-east-1 --group-id sg-05ba363da649d4ef2 --protocol tcp --port 22 --source $PUBLIC_IP/32
 
+          
       - name: Deploy to AWS
         run: bash scripts/deploy.sh
