@@ -15,10 +15,12 @@ chmod 600 ~/.ssh/id_rsa
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
 # Build the Docker image
-docker build -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
+#docker build -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
+docker build -t $DOCKER_USERNAME/$REPOSITORY_NAME:$IMAGE_TAG .
 
 # Push the Docker image to a registry (e.g., Docker Hub)
 docker push $DOCKER_USERNAME/$REPOSITORY_NAME:$IMAGE_TAG
+
 
 
 # SSH into your AWS instance and deploy the updated image
