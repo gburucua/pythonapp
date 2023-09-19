@@ -18,7 +18,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan your-instance-ip >> ~/.ssh/known_hosts
+          ssh-keyscan 34.230.161.156 >> ~/.ssh/known_hosts
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1
