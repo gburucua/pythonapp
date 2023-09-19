@@ -6,20 +6,6 @@ DOCKER_IMAGE_NAME="pythonapp"
 DOCKER_IMAGE_TAG="latest"
 REPOSITORY_NAME="pythonapp"
 
-
-# Set the SSH private key path
-SSH_PRIVATE_KEY_PATH="$HOME/.ssh/id_rsa"
-
-# Ensure the SSH key exists
-if [ ! -f "$SSH_PRIVATE_KEY_PATH" ]; then
-    echo "SSH private key not found at: $SSH_PRIVATE_KEY_PATH"
-    exit 1
-fi
-
-# Set appropriate permissions for the SSH private key
-chmod 600 "$SSH_PRIVATE_KEY_PATH"
-
-
 #Docker login
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
