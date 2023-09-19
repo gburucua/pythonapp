@@ -15,10 +15,10 @@ docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
 # Build the Docker image
 #docker build -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
-docker build -t $DOCKER_USERNAME/pythonapp .
+docker build -t $DOCKER_USERNAME/$REPOSITORY_NAME:$DOCKER_IMAGE_TAG .
 
 # Push the Docker image to a registry (e.g., Docker Hub)
-docker push $DOCKER_USERNAME/pythonapp
+docker push $DOCKER_USERNAME/$REPOSITORY_NAME:$DOCKER_IMAGE_TAG
 
 # SSH into your AWS instance and deploy the updated image
 #ssh -i ~/.ssh/id_rsa ec2-user@$AWS_INSTANCE_IP <<EOF
