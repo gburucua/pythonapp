@@ -8,7 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData(form);
         const data = {
             name: formData.get("name"),
+            surname: formData.get("surname"),
             age: formData.get("age"),
+            gender: formData.get("gender"),
+            comments: formData.get("comments"),
         };
 
         try {
