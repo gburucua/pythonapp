@@ -13,11 +13,11 @@ def create_table():
         password="q1w2e3r4"
     )
     cursor = conn.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), age INT)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), surname VARCHAR(255), age INT, gender VARCHAR(255), comments VARCHAR(255))")
     conn.commit()
     conn.close()
 
-def insert_data(name, age):
+def insert_data(name, surname, age, gender, comments):
     conn = mysql.connector.connect(
         host="db",
         database="your_database",
@@ -25,8 +25,8 @@ def insert_data(name, age):
         password="q1w2e3r4"
     )
     cursor = conn.cursor()
-    query = "INSERT INTO users (name, age) VALUES (%s, %s)"
-    values = (name, age)
+    query = "INSERT INTO users (name, surname, age, gender, comments) VALUES (%s, %s, %s, %s, %s)"
+    values = (name, surname, age, gender, comments)
     cursor.execute(query, values)
     conn.commit()
     conn.close()
@@ -49,10 +49,13 @@ def fetch_data_from_database():
 def index():
     if request.method == "POST":
         name = request.form["name"]
+        surname = request.form['surname']
         age = int(request.form["age"])
+        gender = request.form['gender']
+        comments = request.form['comments']
         try:
             create_table()
-            insert_data(name, age)
+            insert_data(name, surname, age, gender, comments)
             return render_template("index.html", data_saved=True)
         except mysql.connector.Error as error:
             error_message = f"An error occurred while connecting to the database: {error}"
@@ -68,10 +71,13 @@ def get_data():
 @app.route("/api/data", methods=["POST"])
 def save_data():
     try:
-        name = request.json["name"]
-        age = int(request.json["age"])
+        name = request.form["name"]
+        surname = request.form['surname']
+        age = int(request.form["age"])
+        gender = request.form['gender']
+        comments = request.form['comments']
         create_table()
-        insert_data(name, age)
+        insert_data(name, surname, age, gender, comments)
         return jsonify({"message": "Data saved successfully"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
