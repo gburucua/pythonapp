@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
             comments: formData.get("comments"),
         };
 
+        console.log("Data object:", data); // Log the data object
+
+
         try {
             const response = await fetch("/api/data", {
                 method: "POST",
