@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
             surname: formData.get("surname"),
             age: formData.get("age"),
             gender: formData.get("gender"),
-            comments: formData.get("comments"),
+            comments: formData.get("comments")
         };
 
         console.log("Data object:", data); // Log the data object
