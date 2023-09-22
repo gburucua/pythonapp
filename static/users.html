@@ -5,33 +5,68 @@
 </head>
 
 <style>
-body{
+body {
     background-image: url('/img/background.jpg');
 }
 </style>
 
-    <h1>User Data Entry</h1>
-    <form id="dataForm">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required><br><br>
+<h1>User Data Entry</h1>
+<form id="dataForm">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required><br><br>
 
-        <label for="surname">Surame:</label>
-        <input type="text" name="surname" id="surname" required><br><br>
+    <label for="surname">Surame:</label>
+    <input type="text" name="surname" id="surname" required><br><br>
 
-        <label for="age">Age:</label>
-        <input type="number" name="age" id="age" required><br><br>
-        
-        <label for="gender">Gender:</label>
-        <input type="text" name="gender" id="gender" required><br><br>
-
-        <label for="comments">Comments:</label>
-        <input type="text" name="comments" id="comments" required><br><br>
-
-        <button type="submit">Submit</button>
-    </form>
-
-    <div id="message"></div>
+    <label for="age">Age:</label>
+    <input type="number" name="age" id="age" required><br><br>
     
-    <script src="/script.js"></script>
+    <label for="gender">Gender:</label>
+    <input type="text" name="gender" id="gender" required><br><br>
 
-</html>   
+    <label for="comments">Comments:</label>
+    <input type="text" name="comments" id="comments" required><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+<div id="message"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("dataForm");
+    const messageDiv = document.getElementById("message");
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get("name"),
+            surname: formData.get("surname"),
+            age: formData.get("age"),
+            gender: formData.get("gender"),
+            comments: formData.get("comments")
+        };
+
+        console.log("Data object:", data); // Log the data object
+
+        try {
+            const response = await fetch("/api/data", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            messageDiv.textContent = result.message;
+        } catch (error) {
+            console.error("Error:", error);
+            messageDiv.textContent = "An error occurred.";
+        }
+    });
+});
+</script>
+
+</html>
