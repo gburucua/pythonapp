@@ -78,9 +78,9 @@ def save_data():
         comments = request.form['comments']
         create_table()
         insert_data(name, surname, age, gender, comments)
-        return jsonify({"message": "Data saved successfully"})
+        return jsonify({"message": "Data saved successfully"}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), 400
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
