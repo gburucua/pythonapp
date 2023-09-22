@@ -55,6 +55,9 @@ def index():
         gender = request.form["gender"]
         comments = request.form["comments"]
 
+        # Print the form data
+        print("Form Data:", request.form)
+
         pdb.set_trace() # Add this line to start debugging
 
         try:
