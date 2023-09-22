@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import time
 import mysql.connector
+import pdb
 
 app = Flask(__name__, template_folder='.', static_url_path='', static_folder='static')  # Specify the template folder
 
@@ -53,6 +54,9 @@ def index():
         age = int(request.form["age"])
         gender = request.form["gender"]
         comments = request.form["comments"]
+
+        pdb.set_trace() # Add this line to start debugging
+
         try:
             create_table()
             insert_data(name, surname, age, gender, comments)
