@@ -49,10 +49,10 @@ def fetch_data_from_database():
 def index():
     if request.method == "POST":
         name = request.form["name"]
-        surname = request.form['surname']
+        surname = request.form["surname"]
         age = int(request.form["age"])
-        gender = request.form['gender']
-        comments = request.form['comments']
+        gender = request.form["gender"]
+        comments = request.form["comments"]
         try:
             create_table()
             insert_data(name, surname, age, gender, comments)
@@ -72,10 +72,10 @@ def get_data():
 def save_data():
     try:
         name = request.form["name"]
-        surname = request.form['surname']
+        surname = request.form["surname"]
         age = int(request.form["age"])
-        gender = request.form['gender']
-        comments = request.form['comments']
+        gender = request.form["gender"]
+        comments = request.form["comments"]
         create_table()
         insert_data(name, surname, age, gender, comments)
         return jsonify({"message": "Data saved successfully"}), 200
