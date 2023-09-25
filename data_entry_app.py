@@ -2,8 +2,26 @@ from flask import Flask, render_template, request, jsonify
 import time
 import mysql.connector
 import pdb
+import logging
+from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__, template_folder='.', static_url_path='', static_folder='static')  # Specify the template folder
+
+# Configure the logger
+handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
+handler.setLevel(logging.INFO)
+
+# Set the format of the log messages
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+# Attach the handler to the app's logger
+app.logger.addHandler(handler)
+
+# Set the log level for the app
+app.logger.setLevel(logging.INFO)
+
+
 
 
 def create_table():
