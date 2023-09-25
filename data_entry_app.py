@@ -78,6 +78,9 @@ def get_data():
 @app.route("/api/data", methods=["POST"])
 def save_data():
     try:
+        # Log the request data
+        app.logger.info("Request data: %s", request.get_data(as_text=True))
+
         name = request.form["name"]
         #surname = request.form["surname"]
         age = request.form["age"]
