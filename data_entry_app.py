@@ -66,8 +66,8 @@ def index():
             return render_template("index.html", data_saved=True)
         except mysql.connector.Error as error:
             error_message = f"An error occurred while connecting to the database: {error}"
-            return render_template("index.html", error_message=error_message, data_saved=False)
-    return render_template("index.html", data_saved=False)
+            return render_template("users.html", error_message=error_message, data_saved=False)
+    return render_template("users.html", data_saved=False)
 
 @app.route("/api/data", methods=["GET"])
 def get_data():
