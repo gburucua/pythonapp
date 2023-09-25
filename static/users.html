@@ -15,17 +15,8 @@ body {
     <label for="name">Prenom:</label>
     <input type="text" name="name" id="name" required><br><br>
 
-    <label for="surname">Surame:</label>
-    <input type="text" name="surname" id="surname" required><br><br>
-
     <label for="age">Age:</label>
     <input type="number" name="age" id="age" required><br><br>
-    
-    <label for="gender">Gender:</label>
-    <input type="text" name="gender" id="gender" required><br><br>
-
-    <label for="comments">Comments:</label>
-    <input type="text" name="comments" id="comments" required><br><br>
 
     <button type="submit">Submit</button>
 </form>
@@ -42,10 +33,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData(form);
         const data = {
             name: formData.get("name"),
-            surname: formData.get("surname"),
-            age: formData.get("age"),
-            gender: formData.get("gender"),
-            comments: formData.get("comments")
+            //surname: formData.get("surname"),
+            age: formData.get("age")
+            //gender: formData.get("gender"),
+            //comments: formData.get("comments")
         };
 
         console.log("Data object:", data); // Log the data object

@@ -14,11 +14,11 @@ def create_table():
         password="q1w2e3r4"
     )
     cursor = conn.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), surname VARCHAR(255), age INT, gender VARCHAR(255), comments VARCHAR(255))")
+    cursor.execute("CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), age INT)")
     conn.commit()
     conn.close()
 
-def insert_data(name, surname, age, gender, comments):
+def insert_data(name, age):
     conn = mysql.connector.connect(
         host="db",
         database="your_database",
@@ -26,8 +26,8 @@ def insert_data(name, surname, age, gender, comments):
         password="q1w2e3r4"
     )
     cursor = conn.cursor()
-    query = "INSERT INTO users (name, surname, age, gender, comments) VALUES (%s, %s, %s, %s, %s)"
-    values = (name, surname, age, gender, comments)
+    query = "INSERT INTO users (name, age) VALUES (%s, %s)"
+    values = (name, age)
     cursor.execute(query, values)
     conn.commit()
     conn.close()
@@ -50,10 +50,10 @@ def fetch_data_from_database():
 def index():
     if request.method == "POST":
         name = request.form["name"]
-        surname = request.form["surname"]
+        #surname = request.form["surname"]
         age = int(request.form["age"])
-        gender = request.form["gender"]
-        comments = request.form["comments"]
+        #gender = request.form["gender"]
+        #comments = request.form["comments"]
 
         # Print the form data
         print("Form Data:", request.form)
@@ -62,7 +62,7 @@ def index():
 
         try:
             create_table()
-            insert_data(name, surname, age, gender, comments)
+            insert_data(name, age)
             return render_template("index.html", data_saved=True)
         except mysql.connector.Error as error:
             error_message = f"An error occurred while connecting to the database: {error}"
@@ -79,12 +79,12 @@ def get_data():
 def save_data():
     try:
         name = request.form["name"]
-        surname = request.form["surname"]
+        #surname = request.form["surname"]
         age = int(request.form["age"])
-        gender = request.form["gender"]
-        comments = request.form["comments"]
+        #gender = request.form["gender"]
+        #comments = request.form["comments"]
         create_table()
-        insert_data(name, surname, age, gender, comments)
+        insert_data(name, age)
         return jsonify({"message": "Data saved successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
