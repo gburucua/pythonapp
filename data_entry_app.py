@@ -14,7 +14,7 @@ def create_table():
         password="q1w2e3r4"
     )
     cursor = conn.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), age INT)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), age VARCHAR(255))")
     conn.commit()
     conn.close()
 
@@ -51,7 +51,7 @@ def index():
     if request.method == "POST":
         name = request.form["name"]
         #surname = request.form["surname"]
-        age = int(request.form["age"])
+        age = request.form["age"]
         #gender = request.form["gender"]
         #comments = request.form["comments"]
 
@@ -80,7 +80,7 @@ def save_data():
     try:
         name = request.form["name"]
         #surname = request.form["surname"]
-        age = int(request.form["age"])
+        age = request.form["age"]
         #gender = request.form["gender"]
         #comments = request.form["comments"]
         create_table()
