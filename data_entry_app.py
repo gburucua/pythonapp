@@ -9,7 +9,7 @@ app = Flask(__name__, template_folder='.', static_url_path='', static_folder='st
 
 # Configure the logger
 handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
-handler.setLevel(logging.INFO)
+handler.setLevel(logging.DEBUG)
 
 # Set the format of the log messages
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -19,7 +19,7 @@ handler.setFormatter(formatter)
 app.logger.addHandler(handler)
 
 # Set the log level for the app
-app.logger.setLevel(logging.INFO)
+app.logger.setLevel(logging.DEBUG)
 
 
 
